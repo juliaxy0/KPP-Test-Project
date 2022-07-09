@@ -1,0 +1,81 @@
+CREATE DATABASE webprojectfinal;
+
+CREATE table persons_data (
+    ic varchar(20) PRIMARY KEY NOT null,
+    gender varchar(15)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE table admin(
+   email varchar(100)PRIMARY KEY NOT null,
+   PASSWORD varchar(50),
+   name varchar(100)
+    )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    
+create table answers (
+    answer_id int(3),
+    rating int(5),
+    answer varchar(100)
+    )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE table person_ans(
+   ic int(3),
+   answer_id int(3),
+   ans_choice varchar(100),
+   CONSTRAINT FOREIGN key fk1 (ic) REFERENCES persons_data (ic),
+    CONSTRAINT FOREIGN key fk2 (answer_id) REFERENCES answers (answer_id) 
+    )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE table questions(
+   question varchar(100),
+   question_no int(3) PRIMARY KEY NOT null,
+   picture mediumblob
+    )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    
+CREATE TABLE tbl_token_auth (
+  id int(11) PRIMARY KEY NOT NULL,
+  email varchar(255) NOT NULL,
+  password_hash varchar(255) NOT NULL AUTO_INCREMENT,
+  selector_hash varchar(255) NOT NULL,
+  is_expired int(11) NOT NULL DEFAULT '0',
+  expiry_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+create table persons_result(
+    ic varchar(20) primary KEY,
+    result int(10),
+    status varchar(10),
+    constraint foreign key (ic) references persons_data(ic)
+    );
+
+INSERT INTO questions (question_no, question, picture) VALUES ('1', 'Apakah nombor yang ditunjukkan dalam gambar tersebut',FILE_READ('buta_warna1.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('2', 'Apakah nombor yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna2.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('3', 'Apakah nombor yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna3.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('4', 'Apakah nombor yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna4.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('5', 'Apakah bentuk yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna5.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('6', 'Apakah bentuk yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna6.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('7', 'Apakah bentuk yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna7.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('8', 'Apakah nombor yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna8.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('9', 'Apakah nombor yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna9.png'));
+INSERT INTO questions (question_no, question, picture) VALUES ('10', 'Apakah warna yang ditunjukkan dalam gambar tersebut?',FILE_READ('buta_warna10.png'));
+
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('1', '2', '1');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('2', '5', '2');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('3', '45', '3');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('4', '74', '4');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('5', 'Kapal', '5');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('6', 'Segiempat sama dan Bulat', '6');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('7', 'Bintang-Segiempat dan Bulat', '7');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('8', '8', '8');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('9', '10', '9');
+INSERT INTO `answers` (`answer_id`, `answer`, `question_no`) VALUES ('10', 'Hijau', '10');
+
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('8','2','6','1','1');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('4','2','5','2','2');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('44','45','55','3','3');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('84','24','74','4','4');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('Bulat','Segitiga','Kapal','5','5');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('Segiempat dan Segitiga','Segitiga dan Bulat','Segiempat sama dan Bulat','6','6');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('Bintang-Segiempat dan Bulat','Bintang-Bintang dan Segitiga','Bulat-Bulat dan Segiempat sama','7','7');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('9','5','8','8','8');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('2','10','3','9','9');
+INSERT INTO `chooseans`(`ans1`, `ans2`, `ans3`, `answer_id`, `question_no`) VALUES ('Merah','Hijau','Putih','10','10');
