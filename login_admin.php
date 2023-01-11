@@ -7,7 +7,7 @@ require_once "Util.php";
 $auth = new Auth();
 $util = new Util();
 
-require_once "authCookieSessionValidate.php";
+
 
 //if logged in
 if ($isLoggedIn) {
